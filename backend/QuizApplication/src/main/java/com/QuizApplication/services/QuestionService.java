@@ -1,5 +1,6 @@
 package com.QuizApplication.services;
 
+import com.QuizApplication.dto.QuestionRequestObject;
 import com.QuizApplication.entities.Question;
 import com.QuizApplication.repository.QuestionRepository;
 import org.aspectj.weaver.patterns.TypePatternQuestions;
@@ -14,6 +15,8 @@ public class QuestionService {
 
     @Autowired
     private QuestionRepository questionRepository;
+    @Autowired
+    private MappingServices mappingServices;
 
     public List<Question> getQuestions()
     {
@@ -27,5 +30,13 @@ public class QuestionService {
         }
 
         return questions;
+    }
+
+    public Question addQuestion(QuestionRequestObject questionRequestObject)
+    {
+        // I have called the mappingServices to convert the DTO the Obj to store it in the question database
+        Question question = mappingServices.convertDTOToQuestionObject(questionRequestObject);
+        questionRepository.save(question);
+        return question;
     }
 }

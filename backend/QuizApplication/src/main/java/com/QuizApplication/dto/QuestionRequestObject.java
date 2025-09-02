@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class QuestionRequestObject {
-    private long id;
-
     private String category;
     private difficulty difficultyLevel;
     private String option1;

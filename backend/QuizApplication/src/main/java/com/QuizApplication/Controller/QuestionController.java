@@ -1,5 +1,6 @@
 package com.QuizApplication.Controller;
 
+import com.QuizApplication.dto.QuestionRequestObject;
 import com.QuizApplication.entities.Question;
 import com.QuizApplication.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +14,18 @@ import java.util.List;
 public class QuestionController {
 
     @Autowired
-    QuestionService questionService;
+    private QuestionService questionService;
 
     @GetMapping("getQuestions")
     public List<Question> questions()
     {
         return questionService.getQuestions();
+    }
+
+    @PostMapping("addquestion")
+    public Question addQuestion(@RequestBody QuestionRequestObject questionRequestObject)
+    {
+        // I have used the return beacuse once the object crated the user can see it
+        return questionService.addQuestion(questionRequestObject);
     }
 }
