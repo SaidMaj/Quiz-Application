@@ -1,6 +1,7 @@
 package com.QuizApplication.Controller;
 
 import com.QuizApplication.dto.QuestionRequestObject;
+import com.QuizApplication.dto.QuestionUpdateRequest;
 import com.QuizApplication.entities.Question;
 import com.QuizApplication.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,4 +29,11 @@ public class QuestionController {
         // I have used the return beacuse once the object crated the user can see it
         return questionService.addQuestion(questionRequestObject);
     }
+
+    @PutMapping("editquestion/{questionId}")
+    public Question addQuestion(@RequestBody QuestionUpdateRequest updateRequest, @PathVariable long questionId)
+    {
+        return questionService.editQuestion(updateRequest, questionId);
+    }
+    
 }
