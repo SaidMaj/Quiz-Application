@@ -1,6 +1,7 @@
 package com.QuizApplication.services;
 
 import com.QuizApplication.dto.QuestionRequestObject;
+import com.QuizApplication.dto.QuestionUpdateRequest;
 import com.QuizApplication.entities.Question;
 import com.QuizApplication.repository.QuestionRepository;
 import org.aspectj.weaver.patterns.TypePatternQuestions;
@@ -38,5 +39,10 @@ public class QuestionService {
         Question question = mappingServices.convertDTOToQuestionObject(questionRequestObject);
         questionRepository.save(question);
         return question;
+    }
+
+    public Question editQuestion(QuestionUpdateRequest updateRequest, long questionId) {
+        //I have called mappingServices to update the Question Obj using The UpdateRequest DTO and I used questionId to find specific question
+        return questionRepository.save(mappingServices.updateQuestionObject(updateRequest, questionId));
     }
 }
