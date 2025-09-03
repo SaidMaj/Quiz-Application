@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController()
 @RequestMapping("question")
@@ -22,6 +23,13 @@ public class QuestionController {
     {
         return questionService.getQuestions();
     }
+    
+    @GetMapping("getQuestion/{questionId}")
+    public Optional<Question> questions(@PathVariable long questionId)
+    {
+        return questionService.getQuestion(questionId);
+    }
+    
 
     @PostMapping("addquestion")
     public Question addQuestion(@RequestBody QuestionRequestObject questionRequestObject)
