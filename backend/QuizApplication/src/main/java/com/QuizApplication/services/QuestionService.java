@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class QuestionService {
@@ -56,5 +57,9 @@ public class QuestionService {
         questionRepository.deleteById(questionId);
 
         return true;
+    }
+
+    public Optional<Question> getQuestion(long questionId) {
+        return questionRepository.findById(questionId);
     }
 }
