@@ -35,14 +35,26 @@ public class QuestionService {
 
     public Question addQuestion(QuestionRequestObject questionRequestObject)
     {
-        // I have called the mappingServices to convert the DTO the Obj to store it in the question database
-        Question question = mappingServices.convertDTOToQuestionObject(questionRequestObject);
-        questionRepository.save(question);
-        return question;
+        //Here I have declared a new question to add the dto value to it
+        Question question = new Question();
+
+        //Here the code first convert DTO to OBJ then it save it in the database after that it returned to the user
+        return questionRepository.save(mappingServices.convertDTOToQuestionObject(questionRequestObject, question));
     }
 
     public Question editQuestion(QuestionUpdateRequest updateRequest, long questionId) {
-        //I have called mappingServices to update the Question Obj using The UpdateRequest DTO and I used questionId to find specific question
-        return questionRepository.save(mappingServices.updateQuestionObject(updateRequest, questionId));
+
+        //Here I used an method from the repo to get me a specific question by using the questionId
+        Question question = questionRepository.getById(questionId);
+
+        //Here the first DTO converted to question Service, after that it saved to the database
+        return questionRepository.save(mappingServices.convertDTOToQuestionObject(updateRequest, question));
+    }
+
+    public boolean deleteQuestion(long questionId) {
+        //I have called the deleteById method to delete the question from the database
+        questionRepository.deleteById(questionId);
+
+        return true;
     }
 }

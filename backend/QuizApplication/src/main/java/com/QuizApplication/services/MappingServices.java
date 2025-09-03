@@ -14,9 +14,8 @@ public class MappingServices {
     @Autowired
     private QuestionRepository questionRepository;
 
-   public Question convertDTOToQuestionObject(QuestionRequestObject questionRequestObject)
+   public Question convertDTOToQuestionObject(QuestionRequestObject questionRequestObject, Question question)
    {
-       Question question = new Question();
 
        question.setCategory(questionRequestObject.getCategory());
        question.setDifficultyLevel(questionRequestObject.getDifficultyLevel());
@@ -30,9 +29,8 @@ public class MappingServices {
        return question;
    }
 
-   public Question updateQuestionObject(QuestionUpdateRequest questionUpdateRequest, long questionId)
+   public Question convertDTOToQuestionObject(QuestionUpdateRequest questionUpdateRequest, Question question)
    {
-       Question question = questionRepository.getById(questionId);
 
        question.setCategory(questionUpdateRequest.getCategory());
        question.setDifficultyLevel(questionUpdateRequest.getDifficultyLevel());
@@ -45,6 +43,5 @@ public class MappingServices {
 
        return question;
    }
-
 
 }
