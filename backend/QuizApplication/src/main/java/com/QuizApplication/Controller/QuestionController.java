@@ -35,5 +35,11 @@ public class QuestionController {
     {
         return questionService.editQuestion(updateRequest, questionId);
     }
+
+    @DeleteMapping("deletequestion/{questionId}")
+    public boolean deleteQuestion(@PathVariable long questionId)
+    {
+        return questionService.deleteQuestion(questionId);
+    }
     
 }
