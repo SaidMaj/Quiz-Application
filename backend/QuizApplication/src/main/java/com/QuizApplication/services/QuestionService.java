@@ -22,16 +22,16 @@ public class QuestionService {
 
     public List<Question> getQuestions()
     {
-        //I have crated this list to store the questions
-        List <Question> questions = new ArrayList<>();
+//        //I have crated this list to store the questions
+//        List <Question> questions = new ArrayList<>();
+//
+//        //this Range-loop loops through all the questions and add question one by one
+//        for (Question question : questionRepository.findAll())
+//        {
+//            questions.add(question);
+//        }
 
-        //this Range-loop loops through all the questions and add question one by one
-        for (Question question : questionRepository.findAll())
-        {
-            questions.add(question);
-        }
-
-        return questions;
+        return questionRepository.findAll();
     }
 
     public Question addQuestion(QuestionRequestObject questionRequestObject)
@@ -61,5 +61,9 @@ public class QuestionService {
 
     public Optional<Question> getQuestion(long questionId) {
         return questionRepository.findById(questionId);
+    }
+
+    public List<Question> getQuestionsByCategory(String category) {
+        return questionRepository.findAllByCategory(category);
     }
 }
