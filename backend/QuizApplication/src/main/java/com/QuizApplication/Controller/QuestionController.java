@@ -19,17 +19,24 @@ public class QuestionController {
     private QuestionService questionService;
 
     @GetMapping("getQuestions")
-    public List<Question> questions()
+    public List<Question> getQuestions()
     {
         return questionService.getQuestions();
     }
-    
+
+
     @GetMapping("getQuestion/{questionId}")
-    public Optional<Question> questions(@PathVariable long questionId)
+    public Optional<Question> getQuestion(@PathVariable long questionId)
     {
         return questionService.getQuestion(questionId);
     }
-    
+
+    @GetMapping("category/{category}")
+    public List<Question> getQuestionsByCategory(@PathVariable String category)
+    {
+        return questionService.getQuestionsByCategory(category);
+    }
+
 
     @PostMapping("addquestion")
     public Question addQuestion(@RequestBody QuestionRequestObject questionRequestObject)
@@ -39,7 +46,7 @@ public class QuestionController {
     }
 
     @PutMapping("editquestion/{questionId}")
-    public Question addQuestion(@RequestBody QuestionUpdateRequest updateRequest, @PathVariable long questionId)
+    public Question editQuestion(@RequestBody QuestionUpdateRequest updateRequest, @PathVariable long questionId)
     {
         return questionService.editQuestion(updateRequest, questionId);
     }
