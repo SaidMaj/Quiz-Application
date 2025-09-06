@@ -5,6 +5,8 @@ import com.QuizApplication.dto.QuestionUpdateRequest;
 import com.QuizApplication.entities.Question;
 import com.QuizApplication.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -19,42 +21,47 @@ public class QuestionController {
     private QuestionService questionService;
 
     @GetMapping("getQuestions")
-    public List<Question> getQuestions()
+    public ResponseEntity<List<Question>> getQuestions()
     {
-        return questionService.getQuestions();
+        // the return statements returns all the questions and the status 200 when a request happens
+        return new ResponseEntity<>(questionService.getQuestions(),HttpStatus.OK);
     }
 
 
     @GetMapping("getQuestion/{questionId}")
-    public Optional<Question> getQuestion(@PathVariable long questionId)
+    public ResponseEntity<Optional<Question>> getQuestion(@PathVariable long questionId)
     {
-        return questionService.getQuestion(questionId);
+        // the return statements returns the question by questionId and the status 200 when a request happens
+        return new ResponseEntity<>(questionService.getQuestion(questionId), HttpStatus.OK);
     }
 
     @GetMapping("category/{category}")
-    public List<Question> getQuestionsByCategory(@PathVariable String category)
+    public ResponseEntity<List<Question>> getQuestionsByCategory(@PathVariable String category)
     {
-        return questionService.getQuestionsByCategory(category);
+        //the return statements returns all the questions related to the specific category and the status 200 when a request happens
+        return new ResponseEntity<>(questionService.getQuestionsByCategory(category), HttpStatus.OK);
     }
 
 
     @PostMapping("addquestion")
-    public Question addQuestion(@RequestBody QuestionRequestObject questionRequestObject)
+    public ResponseEntity<Question> addQuestion(@RequestBody QuestionRequestObject questionRequestObject)
     {
-        // I have used the return beacuse once the object crated the user can see it
-        return questionService.addQuestion(questionRequestObject);
+        //the return statements returns The new created Obj and the status code 201
+        return new ResponseEntity<>(questionService.addQuestion(questionRequestObject), HttpStatus.CREATED);
     }
 
     @PutMapping("editquestion/{questionId}")
-    public Question editQuestion(@RequestBody QuestionUpdateRequest updateRequest, @PathVariable long questionId)
+    public ResponseEntity<Question> editQuestion(@RequestBody QuestionUpdateRequest updateRequest, @PathVariable long questionId)
     {
-        return questionService.editQuestion(updateRequest, questionId);
+        //the return statements returns The edited Obj and the status code 200
+        return new ResponseEntity<>(questionService.editQuestion(updateRequest, questionId), HttpStatus.OK );
     }
 
     @DeleteMapping("deletequestion/{questionId}")
-    public boolean deleteQuestion(@PathVariable long questionId)
+    public ResponseEntity<Boolean> deleteQuestion(@PathVariable long questionId)
     {
-        return questionService.deleteQuestion(questionId);
+        //the return statements returns True and the status code 200, when  the deletion happens Successfully
+        return new ResponseEntity<>(questionService.deleteQuestion(questionId), HttpStatus.OK);
     }
     
 }
