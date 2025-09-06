@@ -6,6 +6,8 @@ import com.QuizApplication.entities.Question;
 import com.QuizApplication.repository.QuestionRepository;
 import org.aspectj.weaver.patterns.TypePatternQuestions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -31,6 +33,7 @@ public class QuestionService {
 //            questions.add(question);
 //        }
 
+        // returns all the questions
         return questionRepository.findAll();
     }
 
