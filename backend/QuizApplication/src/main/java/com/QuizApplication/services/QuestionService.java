@@ -49,7 +49,7 @@ public class QuestionService {
     public Question editQuestion(QuestionUpdateRequest updateRequest, long questionId) {
 
         //Here I used an method from the repo to get me a specific question by using the questionId
-        Question question = questionRepository.getById(questionId);
+        Question question = questionRepository.getById(questionId).orElse;
 
         //Here the first DTO converted to question Service, after that it saved to the database
         return questionRepository.save(mappingServices.convertDTOToQuestionObject(updateRequest, question));
