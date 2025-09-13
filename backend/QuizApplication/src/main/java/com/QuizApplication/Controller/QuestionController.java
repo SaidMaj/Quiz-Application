@@ -7,9 +7,9 @@ import com.QuizApplication.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,14 +44,14 @@ public class QuestionController {
 
 
     @PostMapping("addquestion")
-    public ResponseEntity<Question> addQuestion(@RequestBody QuestionRequestObject questionRequestObject)
+    public ResponseEntity<Question> addQuestion(@Validated @RequestBody QuestionRequestObject questionRequestObject)
     {
         //the return statements returns The new created Obj and the status code 201
         return new ResponseEntity<>(questionService.addQuestion(questionRequestObject), HttpStatus.CREATED);
     }
 
     @PutMapping("editquestion/{questionId}")
-    public ResponseEntity<Question> editQuestion(@RequestBody QuestionUpdateRequest updateRequest, @PathVariable long questionId)
+    public ResponseEntity<Question> editQuestion(@Validated @RequestBody QuestionUpdateRequest updateRequest, @PathVariable long questionId)
     {
         //the return statements returns The edited Obj and the status code 200
         return new ResponseEntity<>(questionService.editQuestion(updateRequest, questionId), HttpStatus.OK );
