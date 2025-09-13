@@ -27,7 +27,7 @@ public class DifficultyLevelValidator implements ConstraintValidator<DifficultyL
              levels.add(capitalizeWord(level.name()));
          }
 
-        return levels.contains(difficultyLevel.toUpperCase());
+        return levels.contains(capitalizeWord(difficultyLevel));
     }
 
 
