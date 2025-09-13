@@ -3,9 +3,12 @@ package com.QuizApplication.services;
 import com.QuizApplication.dto.QuestionRequestObject;
 import com.QuizApplication.dto.QuestionUpdateRequest;
 import com.QuizApplication.entities.Question;
+import com.QuizApplication.entities.difficulty;
 import com.QuizApplication.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import static com.QuizApplication.Utilites.StringUtility.capitalizeWord;
 
 @Service
 public class MappingServices {
@@ -18,7 +21,7 @@ public class MappingServices {
    {
 
        question.setCategory(questionRequestObject.getCategory());
-       question.setDifficultyLevel(questionRequestObject.getDifficultyLevel());
+       question.setDifficultyLevel(difficulty.valueOf(capitalizeWord(questionRequestObject.getDifficultyLevel())));
        question.setOption1(questionRequestObject.getOption1());
        question.setOption2(questionRequestObject.getOption2());
        question.setOption3(questionRequestObject.getOption3());
@@ -33,7 +36,7 @@ public class MappingServices {
    {
 
        question.setCategory(questionUpdateRequest.getCategory());
-       question.setDifficultyLevel(questionUpdateRequest.getDifficultyLevel());
+       question.setDifficultyLevel(difficulty.valueOf(capitalizeWord(questionUpdateRequest.getDifficultyLevel())));
        question.setOption1(questionUpdateRequest.getOption1());
        question.setOption2(questionUpdateRequest.getOption2());
        question.setOption3(questionUpdateRequest.getOption3());
