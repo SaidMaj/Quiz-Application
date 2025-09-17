@@ -3,6 +3,7 @@ package com.QuizApplication.services;
 import com.QuizApplication.dto.QuestionRequestObject;
 import com.QuizApplication.dto.QuestionUpdateRequest;
 import com.QuizApplication.entities.Question;
+import com.QuizApplication.exceptions.QuestionNotFoundException;
 import com.QuizApplication.repository.QuestionRepository;
 import org.aspectj.weaver.patterns.TypePatternQuestions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,25 +41,41 @@ public class QuestionService {
 
     public Question editQuestion(QuestionUpdateRequest updateRequest, long questionId) {
 
-        //Here I used an method from the repo to get me a specific question by using the questionId
-        Question question = questionRepository.getById(questionId);
+        //Here I used an method from the repo to find me a specific question by using the questionId, in case the question not found an error will be thrown
+        Question question = questionRepository.findById(questionId)
+                .orElseThrow(() -> new QuestionNotFoundException("question with " + questionId + " not found"));
 
         //Here the first DTO converted to question Service, after that it saved to the database
         return questionRepository.save(mappingServices.convertDTOToQuestionObject(updateRequest, question));
     }
 
     public boolean deleteQuestion(long questionId) {
+
+        //The if statement checks if there a question already exists by the given id in case no an exception will be thrown
+        if (!questionRepository.existsById(questionId))
+        {
+            throw new QuestionNotFoundException("question with " + questionId + " not found");
+        }
+
         //I have called the deleteById method to delete the question from the database
         questionRepository.deleteById(questionId);
 
         return true;
     }
 
-    public Optional<Question> getQuestion(long questionId) {
-        return questionRepository.findById(questionId);
+    public Question getQuestion(long questionId)
+    {
+        /*
+        * in case the question with Id found successfully it will return question
+        * in the other case an exception will be thrown QuestionNotFoundException
+        * */
+        return questionRepository.findById(questionId).
+                orElseThrow(() -> new QuestionNotFoundException("question with " + questionId + " not found"));
     }
 
     public List<Question> getQuestionsByCategory(String category) {
+
+        //The following list stores all the question related to specific category
         return questionRepository.findAllByCategory(category);
     }
 }
