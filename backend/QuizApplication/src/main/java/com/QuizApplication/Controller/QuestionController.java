@@ -3,6 +3,7 @@ package com.QuizApplication.Controller;
 import com.QuizApplication.dto.QuestionRequestObject;
 import com.QuizApplication.dto.QuestionUpdateRequest;
 import com.QuizApplication.entities.Question;
+import com.QuizApplication.exceptions.QuestionNotFoundException;
 import com.QuizApplication.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,11 +28,10 @@ public class QuestionController {
         return new ResponseEntity<>(questionService.getQuestions(),HttpStatus.OK);
     }
 
-
     @GetMapping("getQuestion/{questionId}")
-    public ResponseEntity<Optional<Question>> getQuestion(@PathVariable long questionId)
+    public ResponseEntity<Question> getQuestion(@PathVariable long questionId)
     {
-        // the return statements returns the question by questionId and the status 200 when a request happens
+        // In case the questions found by the questionId the question will be returned with status ok in the other case an exception not found 404
         return new ResponseEntity<>(questionService.getQuestion(questionId), HttpStatus.OK);
     }
 
@@ -41,7 +41,6 @@ public class QuestionController {
         //the return statements returns all the questions related to the specific category and the status 200 when a request happens
         return new ResponseEntity<>(questionService.getQuestionsByCategory(category), HttpStatus.OK);
     }
-
 
     @PostMapping("addquestion")
     public ResponseEntity<Question> addQuestion(@Validated @RequestBody QuestionRequestObject questionRequestObject)
@@ -60,8 +59,8 @@ public class QuestionController {
     @DeleteMapping("deletequestion/{questionId}")
     public ResponseEntity<Boolean> deleteQuestion(@PathVariable long questionId)
     {
-        //the return statements returns True and the status code 200, when  the deletion happens Successfully
-        return new ResponseEntity<>(questionService.deleteQuestion(questionId), HttpStatus.OK);
+        //the return statements returns True and the status code 204, when  the deletion happens Successfully
+        return new ResponseEntity<>(questionService.deleteQuestion(questionId), HttpStatus.NO_CONTENT);
     }
     
 }
