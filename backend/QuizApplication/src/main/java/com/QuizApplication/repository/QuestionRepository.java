@@ -11,4 +11,8 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 
     //I have crated this to find all question that related to on category
     List<Question> findAllByCategory(String category);
+
+    //I have created to following to avoid duplication
+
+    boolean existsByQuestionTitle(String questionTitle);
 }
