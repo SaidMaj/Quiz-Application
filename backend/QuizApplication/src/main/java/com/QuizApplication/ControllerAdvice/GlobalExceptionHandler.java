@@ -1,5 +1,6 @@
 package com.QuizApplication.ControllerAdvice;
 
+import com.QuizApplication.exceptions.QuestionAlreadyExistsException;
 import com.QuizApplication.exceptions.QuestionNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -35,5 +36,12 @@ public class GlobalExceptionHandler
     public String questionNotFoundException(QuestionNotFoundException questionNotFoundException)
     {
         return questionNotFoundException.getMessage();
+    }
+
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    @ExceptionHandler(QuestionAlreadyExistsException.class)
+    public String questionAlreadyExistsException(QuestionAlreadyExistsException questionAlreadyExistsException)
+    {
+        return questionAlreadyExistsException.getMessage();
     }
 }
