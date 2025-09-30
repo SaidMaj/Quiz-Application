@@ -68,6 +68,30 @@ public class QuizServices {
     }
 
 
+    public QuizDto updateQuiz(int quizId,String category, int numberOfQuestions, String difficultyLevel, String quizTitle)
+    {
+        if (!quizRepository.existsById(quizId))
+        {
+            throw new ResourcesNotFoundException("There no such quiz exists by the following id : " + quizId);
+        }
+
+        //get the Quiz By Id and update it
+        Quiz quiz = quizRepository.getById(quizId);
+        quiz.setQuizTitle(quizTitle);
+        quiz.setCategory(category);
+        quiz.setDifficultyLevel(difficultyLevel);
+        quiz.setNumberOfQuestions(numberOfQuestions);
+        quiz.setQuestions(addQuestions(category, numberOfQuestions, difficultyLevel));
+        //saving the quiz to the database
+        quizRepository.save(quiz);
+
+        //Convert Quiz to quiz Dto to return the necessary data
+        QuizDto quizDto = mappingServices.convertingQuizToDto(quiz);
+
+        return quizDto;
+    }
+
+
 
 
     //this method generate questionList based on the user request
