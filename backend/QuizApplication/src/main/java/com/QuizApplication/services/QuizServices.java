@@ -50,6 +50,23 @@ public class QuizServices {
         return quizDto;
     }
 
+    public String deleteQuiz(int quizId)
+    {
+        //When process of deletion happens successfully this message will be returned
+        String message = "Quiz with following id: " + quizId +" has been successfully deleted";
+
+        //Checking if there is a quiz exists by the given Id if no error will be thrown
+        if (!quizRepository.existsById(quizId))
+        {
+            throw new ResourcesNotFoundException("There no such quiz exists by the following id : " + quizId);
+        }
+
+        //here I am removing the quiz from the data base
+        quizRepository.delete(quizRepository.getById(quizId));
+
+        return message;
+    }
+
 
 
 
