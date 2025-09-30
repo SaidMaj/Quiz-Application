@@ -36,6 +36,16 @@ public class QuizController {
         return new ResponseEntity<>(quizServices.createQuiz(category, numberOfQuestions, difficultyLevel, quizTitle), HttpStatus.CREATED);
     }
 
+    @PutMapping("/update/{quizId}")
+    public ResponseEntity<QuizDto> updateQuiz(@PathVariable int quizId,
+                                              @NotBlank(message = "category must not be empty") @RequestParam() String category,
+                                              @Positive(message = "Number of questions must be greater than 0") @RequestParam(name = "noOfQuestions"  ) int numberOfQuestions,
+                                              @RequestParam(required = false, defaultValue = "All") String difficultyLevel,
+                                              @NotBlank(message = "QuizTitle must not be empty") @RequestParam String quizTitle)
+    {
+        return new ResponseEntity<>(quizServices.updateQuiz(quizId, category, numberOfQuestions, difficultyLevel, quizTitle), HttpStatus.OK);
+    }
+
     @DeleteMapping("/delete/{quizId}")
     public ResponseEntity<String> deleteQuiz(@PathVariable int quizId)
     {
