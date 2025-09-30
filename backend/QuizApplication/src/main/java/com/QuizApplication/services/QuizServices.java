@@ -59,4 +59,19 @@ public class QuizServices {
         return questionList;
     }
 
+    //this method validateQuestionList and ensures it according to the user requirements
+    public void validateQuestionList(String category, int numberOfQuestions, String difficultyLevel, List<Question> questionList)
+    {
+        if (questionList.isEmpty())
+        {
+            throw new ResourcesNotFoundException("Questions with given, Category : " + category + " , difficultyLevel : " + difficultyLevel + " Not Found");
+        }else if (numberOfQuestions > questionList.size())
+        {
+            throw new BadRequestException("Bad Request : The given number of questions is larger than the number of questions in the database");
+        }
+
+    }
+
+
+
 }
