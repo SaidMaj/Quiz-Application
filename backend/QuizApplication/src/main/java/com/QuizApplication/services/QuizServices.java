@@ -50,22 +50,26 @@ public class QuizServices {
         return quizDto;
     }
 
-    public String deleteQuiz(int quizId)
-    {
-        //When process of deletion happens successfully this message will be returned
-        String message = "Quiz with following id: " + quizId +" has been successfully deleted";
 
-        //Checking if there is a quiz exists by the given Id if no error will be thrown
+    //Returns random list of questions
+    public List<QuizQuestionDto> getQuiz(int quizId)
+    {
+        Quiz quiz = quizRepository.getById(quizId);
+
         if (!quizRepository.existsById(quizId))
         {
             throw new ResourcesNotFoundException("There no such quiz exists by the following id : " + quizId);
         }
 
-        //here I am removing the quiz from the data base
-        quizRepository.delete(quizRepository.getById(quizId));
+        //The generated quiz will be saved here :
+        List<Question> questionList = quiz.getQuestions();
 
-        return message;
+        //Mapping question to quizQuestionDtoList to show the necessary data only
+        List<QuizQuestionDto> quizQuestionDtoList = mappingServices.mappingQuestionListToDto(questionList);
+
+        return quizQuestionDtoList;
     }
+
 
 
     public QuizDto updateQuiz(int quizId,String category, int numberOfQuestions, String difficultyLevel, String quizTitle)
@@ -91,6 +95,22 @@ public class QuizServices {
         return quizDto;
     }
 
+    public String deleteQuiz(int quizId)
+    {
+        //When process of deletion happens successfully this message will be returned
+        String message = "Quiz with following id: " + quizId +" has been successfully deleted";
+
+        //Checking if there is a quiz exists by the given Id if no error will be thrown
+        if (!quizRepository.existsById(quizId))
+        {
+            throw new ResourcesNotFoundException("There no such quiz exists by the following id : " + quizId);
+        }
+
+        //here I am removing the quiz from the data base
+        quizRepository.delete(quizRepository.getById(quizId));
+
+        return message;
+    }
 
 
 
