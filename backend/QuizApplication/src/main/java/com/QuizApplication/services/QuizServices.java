@@ -35,6 +35,22 @@ public class QuizServices {
     private MappingServices mappingServices;
 
 
+    //Method used to create quiz
+    public QuizDto createQuiz(String category, int numberOfQuestions, String difficultyLevel, String quizTitle)
+    {
+        //Based on the data entered by user list of question will be generated
+        List<Question> questionList = addQuestions(category, numberOfQuestions, difficultyLevel);
+        //Creating a new object of quiz and add the necessary data
+        Quiz quiz = createQuizObject(quizTitle, numberOfQuestions, category,difficultyLevel, questionList);
+        //saving the quiz to the database
+        quizRepository.save(quiz);
+
+        QuizDto quizDto = mappingServices.convertingQuizToDto(quiz);
+
+        return quizDto;
+    }
+
+
 
 
     //this method generate questionList based on the user request
