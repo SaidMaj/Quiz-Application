@@ -112,6 +112,18 @@ public class QuizServices {
         return message;
     }
 
+    public String submitAnswer(int quizId, List<UserAnswer> userAnswerList) {
+
+        if (!quizRepository.existsById(quizId))
+        {
+            throw  new ResourcesNotFoundException("Quiz with The Given Id " + quizId + " Not Found");
+        }
+
+        int  score = countScore(userAnswerList);
+
+        return quizRepository.getById(quizId).getNumberOfQuestions() + " / " + score;
+    }
+
 
     int countScore(List<UserAnswer> userAnswerList)
     {
