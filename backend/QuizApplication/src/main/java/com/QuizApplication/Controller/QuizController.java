@@ -58,4 +58,10 @@ public class QuizController {
         return new ResponseEntity<>(quizServices.deleteQuiz(quizId), HttpStatus.NO_CONTENT);
     }
 
+    @PostMapping("/submit/{quizId}")
+    public ResponseEntity<String> submitAnswer(@PathVariable int quizId, @RequestBody List<UserAnswer> userAnswerList)
+    {
+        return new ResponseEntity<>(quizServices.submitAnswer(quizId, userAnswerList), HttpStatus.OK);
+    }
+
 }
