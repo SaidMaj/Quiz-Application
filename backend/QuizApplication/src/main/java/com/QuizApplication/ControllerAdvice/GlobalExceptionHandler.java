@@ -57,4 +57,19 @@ public class GlobalExceptionHandler
         return resourcesNotFoundException.getMessage();
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ConstraintViolationException.class)
+    public Map<String, String> handlingConstraintViolationException(ConstraintViolationException constraintViolationException)
+    {
+        Map<String, String> map = new HashMap<>();
+
+        for(ConstraintViolation<?> errors : constraintViolationException.getConstraintViolations())
+        {
+            map.put(String.valueOf(errors.getPropertyPath()), errors.getMessage());
+        }
+
+        return map;
+    }
+
+
 }
