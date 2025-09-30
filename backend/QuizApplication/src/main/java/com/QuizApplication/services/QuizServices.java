@@ -113,6 +113,27 @@ public class QuizServices {
     }
 
 
+    int countScore(List<UserAnswer> userAnswerList)
+    {
+        int counter = 0;
+
+        for (UserAnswer answerDetails : userAnswerList)
+        {
+            long questionId = answerDetails.getQuestionId();
+
+            if (!questionRepository.existsById(questionId))
+            {
+                throw new QuestionNotFoundException("Question Not Found With Given Id " + questionId);
+            }
+            if (questionRepository.findById(questionId).get().getRightAnswer().equals(answerDetails.getUserAnswer()))
+            {
+                counter++;
+            }
+        }
+
+        return counter;
+    }
+
 
     //this method generate questionList based on the user request
     public List<Question> getListOfQuestions(String category, String difficultyLevel)
