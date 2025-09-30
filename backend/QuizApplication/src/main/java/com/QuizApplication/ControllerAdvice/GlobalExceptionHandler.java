@@ -77,7 +77,20 @@ public class GlobalExceptionHandler
     {
         return badRequestException.getMessage();
     }
+    
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public String handlerMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException methodArgumentTypeMismatchException)
+    {
+        String fieldName = methodArgumentTypeMismatchException.getName();
+        String Causes = methodArgumentTypeMismatchException.getCause().getMessage();
+        String exceptedDatatype = methodArgumentTypeMismatchException.getRequiredType().toString();
 
 
+        String error = String.format("%s : excepted the following DataType \"%s\" but got this : %s", fieldName, exceptedDatatype, Causes);
+
+
+        return error ;
+    }
 
 }
