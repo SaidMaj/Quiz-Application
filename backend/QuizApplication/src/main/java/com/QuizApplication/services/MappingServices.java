@@ -66,4 +66,20 @@ public class MappingServices {
 
         return  quizDto;
     }
+
+    //Here I am converting question objct to safe type to show the necessary data such as question title,  the options
+    public QuizQuestionDto convertQuestionToQuizQuestionDto(Question question )
+    {
+        QuizQuestionDto quizQuestionDto = new QuizQuestionDto();
+
+        quizQuestionDto.setId(question.getId());
+        quizQuestionDto.setQuestionTitle(question.getQuestionTitle());
+        quizQuestionDto.setOption1(question.getOption1());
+        quizQuestionDto.setOption2(question.getOption2());
+        quizQuestionDto.setOption3(question.getOption3());
+        quizQuestionDto.setOption4(question.getOption4());
+
+        return quizQuestionDto;
+    }
+
 }
