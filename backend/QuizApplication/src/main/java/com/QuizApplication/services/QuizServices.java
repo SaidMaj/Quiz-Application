@@ -34,4 +34,29 @@ public class QuizServices {
     @Autowired
     private MappingServices mappingServices;
 
+
+
+
+    //this method generate questionList based on the user request
+    public List<Question> getListOfQuestions(String category, String difficultyLevel)
+    {
+        //Here converting the enum values to string
+        List<String> difficultyLevels = stream(difficulty.values()).map(Enum::toString).toList();
+
+        List<Question> questionList = new ArrayList<>();
+
+        //here checking if the list doesn't contains the given difficultyLevel from the user for the seek of simplicity I include all the levels
+        if (difficultyLevel.isBlank() || !difficultyLevels.contains(difficultyLevel))
+        {
+            questionList = questionRepository.findAllByCategory(category);
+        }
+        //here if the difficulty level valid list of questions will be created base on CategoryAndDifficultyLevel
+        else if (!difficultyLevel.isBlank() && !category.isBlank() && difficultyLevels.contains(difficultyLevel))
+        {
+            questionList = questionRepository.findAllByCategoryAndDifficultyLevel(category, difficulty.valueOf(difficultyLevel));
+        }
+
+        return questionList;
+    }
+
 }
