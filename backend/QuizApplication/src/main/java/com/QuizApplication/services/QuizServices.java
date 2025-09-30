@@ -65,6 +65,7 @@ public class QuizServices {
         if (questionList.isEmpty())
         {
             throw new ResourcesNotFoundException("Questions with given, Category : " + category + " , difficultyLevel : " + difficultyLevel + " Not Found");
+            /* here where checking if the given numberQuestions is greater than the list size */
         }else if (numberOfQuestions > questionList.size())
         {
             throw new BadRequestException("Bad Request : The given number of questions is larger than the number of questions in the database");
@@ -72,6 +73,18 @@ public class QuizServices {
 
     }
 
+    public Quiz createQuizObject(String quizTitle , int numberOfQuestions, String category, String  difficultyLevel, List<Question> questionList)
+    {
+        Quiz quiz = new Quiz();
+
+        quiz.setQuizTitle(quizTitle);
+        quiz.setNumberOfQuestions(numberOfQuestions);
+        quiz.setCategory(category);
+        quiz.setQuestions(questionList);
+        quiz.setDifficultyLevel(difficultyLevel);
+
+        return quiz;
+    }
 
 
 }
