@@ -71,5 +71,13 @@ public class GlobalExceptionHandler
         return map;
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(BadRequestException.class)
+    public String badRequestException(BadRequestException badRequestException)
+    {
+        return badRequestException.getMessage();
+    }
+
+
 
 }
