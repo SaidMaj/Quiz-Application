@@ -86,5 +86,36 @@ public class QuizServices {
         return quiz;
     }
 
+    public List<Question> addQuestions(String category, int numberOfQuestions, String difficultyLevel)  {
+
+        // here I am capitalized difficultyLevel to ensure when it converted to enum it will equal to the number that I have added
+        difficultyLevel=  capitalizeWord(difficultyLevel);
+        category =  capitalizeWord(category);
+
+        //here I will get all questions related to specific category or a difficultyLevel || in case difficultyLevel doesn't exist or misspelled it will generate with all the levels
+        List<Question> questionList = getListOfQuestions(category, difficultyLevel);
+        //declaring a list to store the questions
+        List<Question> quizQuestionList = new ArrayList<>();
+        int questionListSize = questionList.size();
+        //Initialization of random object to get random numbers
+        Random random = new Random();
+
+        //I am validating the questionList to ensure the quiz along with user requirements
+        validateQuestionList(category, numberOfQuestions, difficultyLevel, questionList);
+
+        //here I am iterating through the questionlist and map each question to QuizQuestionDto to show only the necessary data
+        for (int i = 0 ; i < numberOfQuestions; i++)
+        {
+            //here geting a random number from 1 - questionListSize
+            long RandomNumber = random.nextLong(0,questionListSize);
+            Question question = questionList.get((int)RandomNumber);
+            quizQuestionList.add(question);
+        }
+
+
+        return  quizQuestionList;
+    }
+
+
 
 }
