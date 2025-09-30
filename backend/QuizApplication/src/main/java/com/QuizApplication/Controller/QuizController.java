@@ -24,5 +24,16 @@ import java.util.List;
 @RequestMapping("quiz")
 @Validated
 public class QuizController {
+    @Autowired
+    private QuizServices quizServices;
+
+    @PostMapping("/create")
+    public ResponseEntity<QuizDto> generateQuiz(@NotBlank(message = "category must not be empty") @RequestParam() String category,
+                                                @Positive(message = "Number of questions must be greater than 0") @RequestParam(name = "noOfQuestions"  ) int numberOfQuestions,
+                                                @RequestParam(required = false, defaultValue = "All") String difficultyLevel,
+                                                @NotBlank(message = "QuizTitle must not be empty") @RequestParam String quizTitle)
+    {
+        return new ResponseEntity<>(quizServices.createQuiz(category, numberOfQuestions, difficultyLevel, quizTitle), HttpStatus.CREATED);
+    }
 
 }
