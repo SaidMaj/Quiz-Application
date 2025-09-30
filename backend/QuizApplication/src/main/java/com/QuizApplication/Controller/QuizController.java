@@ -36,6 +36,12 @@ public class QuizController {
         return new ResponseEntity<>(quizServices.createQuiz(category, numberOfQuestions, difficultyLevel, quizTitle), HttpStatus.CREATED);
     }
 
+    @GetMapping("/{quizId}")
+    public ResponseEntity<List<QuizQuestionDto>> getQuiz(@PathVariable int quizId)
+    {
+        return new ResponseEntity<>(quizServices.getQuiz(quizId), HttpStatus.OK);
+    }
+
     @PutMapping("/update/{quizId}")
     public ResponseEntity<QuizDto> updateQuiz(@PathVariable int quizId,
                                               @NotBlank(message = "category must not be empty") @RequestParam() String category,
