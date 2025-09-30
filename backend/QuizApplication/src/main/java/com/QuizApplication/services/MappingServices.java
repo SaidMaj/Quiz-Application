@@ -2,11 +2,17 @@ package com.QuizApplication.services;
 
 import com.QuizApplication.dto.QuestionRequestObject;
 import com.QuizApplication.dto.QuestionUpdateRequest;
+import com.QuizApplication.dto.QuizDto;
+import com.QuizApplication.dto.QuizQuestionDto;
 import com.QuizApplication.entities.Question;
+import com.QuizApplication.entities.Quiz;
 import com.QuizApplication.entities.difficulty;
 import com.QuizApplication.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.QuizApplication.Utilites.StringUtility.capitalizeWord;
 
@@ -47,4 +53,17 @@ public class MappingServices {
        return question;
    }
 
+
+
+    public QuizDto convertingQuizToDto(Quiz quiz)
+    {
+        QuizDto quizDto = new QuizDto();
+        quizDto.setQuizId(quiz.getQuizId());
+        quizDto.setQuizTitle(quiz.getQuizTitle());
+        quizDto.setCategory(quiz.getCategory());
+        quizDto.setNumberOfQuestions(quiz.getNumberOfQuestions());
+        quizDto.setDifficultyLevel(quiz.getDifficultyLevel());
+
+        return  quizDto;
+    }
 }
