@@ -82,4 +82,17 @@ public class MappingServices {
         return quizQuestionDto;
     }
 
+    //In this function I am iterating the questionsList to map it to QuizQuestionDto List
+    public List<QuizQuestionDto> mappingQuestionListToDto(List <Question> questionList)
+    {
+        List <QuizQuestionDto> quizQuestionDtoList =  new ArrayList<>();
+
+        for (Question question : questionList)
+        {
+            quizQuestionDtoList.add(convertQuestionToQuizQuestionDto(question));
+        }
+
+        return quizQuestionDtoList;
+    }
+
 }
