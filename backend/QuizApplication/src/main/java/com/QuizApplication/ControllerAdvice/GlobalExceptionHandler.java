@@ -1,15 +1,20 @@
 package com.QuizApplication.ControllerAdvice;
 
+import com.QuizApplication.exceptions.BadRequestException;
 import com.QuizApplication.exceptions.QuestionAlreadyExistsException;
 import com.QuizApplication.exceptions.QuestionNotFoundException;
+import com.QuizApplication.exceptions.ResourcesNotFoundException;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+import java.lang.reflect.Field;
 import java.util.*;
 
 @RestControllerAdvice
@@ -44,4 +49,12 @@ public class GlobalExceptionHandler
     {
         return questionAlreadyExistsException.getMessage();
     }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(ResourcesNotFoundException.class)
+    public  String resourcesNotFoundException(ResourcesNotFoundException resourcesNotFoundException)
+    {
+        return resourcesNotFoundException.getMessage();
+    }
+
 }
