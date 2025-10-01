@@ -14,6 +14,7 @@ public final class StringUtility
              AVA it will be converted lower
              so the final result Java
         */
+
         word = word.substring(0,1).toUpperCase() + word.substring(1).toLowerCase();
         return word;
     }

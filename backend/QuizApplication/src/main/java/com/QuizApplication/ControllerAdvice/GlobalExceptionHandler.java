@@ -77,7 +77,7 @@ public class GlobalExceptionHandler
     {
         return badRequestException.getMessage();
     }
-    
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public String handlerMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException methodArgumentTypeMismatchException)
