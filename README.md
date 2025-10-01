@@ -203,7 +203,50 @@ http://localhost:8080
 ```
 
 ---
+# Populate Database for Testing
 
+You can quickly populate your database without manually adding questions using AI-generated SQL inserts.
+
+## Steps
+
+1. **Generate SQL Insert Statements via AI Tool**  
+   Use this example prompt in your preferred AI tool (e.g., Grok, ChatGPT):
+
+   ```
+   Generate SQL INSERT statements for table `question` with columns:
+   category, difficulty_level (0=Easy,1=Medium,2=Hard), option1, option2, option3, option4, question_title, right_answer.
+
+   Requirements:
+   - Languages: Python, Java, C, C++
+   - Topics: basic syntax, data structures, object-oriented programming
+   - Distribute difficulty levels 0,1,2
+   - Escape single quotes for MySQL
+   - Avoid duplicates
+   - Generate [number] unique questions
+   ```
+
+   *Note:* Replace `[number]` with the desired number of questions (e.g., 300).
+
+2. **Save SQL to a File**  
+   Copy the generated SQL statements and save them to a file.  
+   Example filename:
+
+   ```
+   questions.sql
+   ```
+
+3. **Run SQL File in MySQL Workbench or CLI**  
+   Execute the SQL file to insert the questions into your database:
+
+   ```
+   mysql -u username -p database_name < questions.sql
+   ```
+
+   - Replace `username` with your MySQL username (e.g., `root`).  
+   - Replace `database_name` with your database name (e.g., `quizdb`).
+
+4. **Database Ready**  
+   All questions are now loaded for testing quizzes.
 ## Usage
 
 1. Use **Postman**, **Insomnia**, or any REST client to test the endpoints.
