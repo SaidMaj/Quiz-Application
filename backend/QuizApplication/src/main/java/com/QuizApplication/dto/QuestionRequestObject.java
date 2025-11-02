@@ -15,7 +15,7 @@ public class QuestionRequestObject {
 
     //I am validating userRequest Ensuring it not blank and validate the question title
     @NotBlank(message = "question title must not be blank or empty or null")
-    @Size(min = 10, max = 120 , message = "the questionTitle length must be in between 20 and 120, not more than 120 or less 20")
+    @Size(min = 10, max = 120 , message = "the questionTitle length must be in between 10 and 120, not more than 120 or less 10")
     private String questionTitle;
 
     //I am validating options 1 - 4 and rightAnswer Ensuring the length is not greater than 350
