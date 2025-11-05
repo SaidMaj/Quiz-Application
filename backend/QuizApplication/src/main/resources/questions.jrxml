@@ -40,38 +40,6 @@
         </element>
     </title>
     <pageHeader height="13"/>
-    <columnHeader height="40">
-        <element kind="line" uuid="dd63962b-d8e4-4200-8266-7ecd99e9cfaf" x="-20" y="20" width="595" height="1" forecolor="#666666"/>
-        <element kind="staticText" uuid="4279491c-2ca2-45a9-a5fa-ea1149fb7447" mode="Opaque" x="111" y="0" width="111" height="40" forecolor="#006699" backcolor="#E6E6E6" fontSize="14.0" bold="true" hTextAlign="Center">
-            <text><![CDATA[Number Of Questions ]]></text>
-            <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="750d9eb3-4864-44f9-b497-7d6a16dd4455"/>
-        </element>
-        <element kind="staticText" uuid="953d144d-5d36-49b8-9a95-6968b350a7e0" mode="Opaque" x="222" y="0" width="111" height="40" forecolor="#006699" backcolor="#E6E6E6" fontSize="14.0" bold="true" hTextAlign="Center">
-            <text><![CDATA[CATEGORIES]]></text>
-            <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c3ceffb0-9509-4e18-ba20-0338bf0b7bf8"/>
-        </element>
-        <element kind="staticText" uuid="0e278388-67db-47cf-adaa-21d333c0057d" mode="Opaque" x="333" y="0" width="111" height="40" forecolor="#006699" backcolor="#E6E6E6" fontSize="14.0" bold="true" hTextAlign="Center">
-            <text><![CDATA[DifficultyLevels]]></text>
-            <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9175b88d-7b53-4e34-838e-22854f0d2960"/>
-        </element>
-    </columnHeader>
-    <detail>
-        <band height="20">
-            <element kind="line" uuid="3fe7b0b0-ca6f-40b5-8479-9cc66f691db8" positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1"/>
-            <element kind="textField" uuid="7aa1b9d6-aae3-46bb-8694-7942fd30ac0b" x="111" y="0" width="111" height="20" fontSize="14.0" textAdjust="StretchHeight" hTextAlign="Center">
-                <expression><![CDATA[$F{ORDERID}]]></expression>
-                <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="750d9eb3-4864-44f9-b497-7d6a16dd4455"/>
-            </element>
-            <element kind="textField" uuid="4ede4863-5d29-4d50-a30f-1e99e30f0118" x="222" y="0" width="111" height="20" fontSize="14.0" textAdjust="StretchHeight" hTextAlign="Center">
-                <expression><![CDATA[$F{ORDERDATE}]]></expression>
-                <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c3ceffb0-9509-4e18-ba20-0338bf0b7bf8"/>
-            </element>
-            <element kind="textField" uuid="50608df1-8f1a-480c-b75f-6f9a4022e3af" x="333" y="0" width="111" height="20" fontSize="14.0" textAdjust="StretchHeight" hTextAlign="Center">
-                <expression><![CDATA[$F{REQUIREDDATE}]]></expression>
-                <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9175b88d-7b53-4e34-838e-22854f0d2960"/>
-            </element>
-        </band>
-    </detail>
     <columnFooter/>
     <pageFooter height="17">
         <element kind="textField" uuid="b55128a9-46dc-4eac-81d0-02bca98faaa7" mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" hTextAlign="Right">
